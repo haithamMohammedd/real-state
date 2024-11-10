@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PropertyController;
+use App\Http\Controllers\Admin\PropertyPhotosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +19,5 @@ use App\Http\Controllers\Admin\PropertyController;
 Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('/',[AdminController::class,'index'])->name('index');
     Route::resource('properties', PropertyController::class);
-    // Route::resource('services', ServiceController::class);
+    Route::resource('property_photos', PropertyPhotosController::class);
 });

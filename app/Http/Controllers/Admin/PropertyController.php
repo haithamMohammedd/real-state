@@ -11,7 +11,7 @@ class PropertyController extends Controller
 {
     public function index()
     {
-        $properties = Property::with('photos')->paginate(3);
+        $properties = Property::paginate(5);
 
         return view('admin.properties.index', compact('properties'));
     }
@@ -46,8 +46,12 @@ class PropertyController extends Controller
         ]);
 
 
-        $img_name = rand() . time() . $request->file('main_image')->getClientOriginalName();
-        $request->file('main_image')->move(public_path('uploads'), $img_name);
+        if ($request->hasFile('main_image') && $request->file('main_image')->isValid()) {
+            $img_name = rand() . time() . $request->file('main_image')->getClientOriginalName();
+            $request->file('main_image')->move(public_path('uploads'), $img_name);
+        } else {
+            return back()->withErrors('No image file was uploaded.');
+        }
 
 
         Property::create([
@@ -85,9 +89,9 @@ class PropertyController extends Controller
      */
     public function edit(string $id)
     {
-        $Property = Property::findOrFail($id);
+        $property = Property::findOrFail($id);
 
-        return view('admin.properties.edit',compact('Property'));
+        return view('admin.properties.edit',compact('property'));
     }
 
     /**
@@ -96,23 +100,34 @@ class PropertyController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'name' => 'required',
+            'property_type' => 'required',
         ]);
 
-        $Property = Property::findOrFail($id);
+        $property = Property::findOrFail($id);
 
-        $img_name = $Property->image;
+        $img_name = $property->main_image;
 
-        if($request->hasFile('image'))
+        if($request->hasFile('main_image'))
         {
-            $img_name = rand().time().$request->file('image')->getClientOriginalName();
+            $img_name = rand().time().$request->file('main_image')->getClientOriginalName();
 
-            $request->file('image')->move(public_path('uploads'),$img_name);
+            $request->file('main_image')->move(public_path('uploads'),$img_name);
         }
 
-        $Property->update([
-            'name' => $request->name,
-            'image' => $img_name,
+        $property->update([
+            'property_type' => $request->property_type,
+            'address' => $request->address,
+            'city' => $request->city,
+            'state' => $request->state,
+            'zip_code' => $request->zip_code,
+            'price' => $request->price,
+            'bed_rooms' => $request->bed_rooms,
+            'bath_rooms' => $request->bath_rooms,
+            'square_footage' => $request->square_footage,
+            'year_built' => $request->year_built,
+            'listing_status' => $request->listing_status,
+            'date_listed' => $request->date_listed,
+            'main_image' => $img_name,
         ]);
 
         return redirect()->route('admin.properties.index')->with('msg','Property updated successfully')->with('type','info');
@@ -123,9 +138,9 @@ class PropertyController extends Controller
      */
     public function destroy(string $id)
     {
-        $Property = Property::findOrFail($id);
-        File::delete(public_path('uploads/'.$Property->image));
-        $Property->delete();
+        $property = Property::findOrFail($id);
+        File::delete(public_path('uploads/'.$property->image));
+        $property->delete();
 
         return redirect()->route('admin.properties.index')->with('msg','Property created successfully')->with('type','danger');
     }

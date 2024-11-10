@@ -44,8 +44,8 @@
          </div>
 
          <div class="mb-3">
-            <label for="main_image">Property Image</label>
-            <input type="file" name="main_image" class="form-control">
+            <label for="main_image">Property Images</label>
+            <input type="file" name="main_image" class="form-control" multiple>
          </div>
 
          <div class="mb-3">
@@ -73,7 +73,7 @@
             <select name="listing_status" class="form-control">
                 <option value="available" {{ old('listing_status') == 'available' ? 'selected' : '' }}>Available</option>
                 <option value="sold" {{ old('listing_status') == 'sold' ? 'selected' : '' }}>Sold</option>
-                <option value="pending" {{ old('listing_status') == 'pending' ? 'selected' : '' }}>Under Offer</option>
+                <option value="pending" {{ old('listing_status') == 'pending' ? 'selected' : '' }}>Pending</option>
             </select>
          </div>
 

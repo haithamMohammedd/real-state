@@ -44,7 +44,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.index') }}">
+                <a class="nav-link" href="{{ route('admin.properties.index') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -62,7 +62,7 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-home"></i>
-                    <span>properties</span>
+                    <span>Properties</span>
                 </a>
                 <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -78,58 +78,18 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-heart"></i>
-                    <span>Services</span>
+                    <i class="fas fa-fw fa-image"></i>
+                    <span>Property Photos</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="">All Services</a>
-                        <a class="collapse-item" href="">Add New</a>
+                        <a class="collapse-item" href="{{ route('admin.property_photos.index') }}">All Photos</a>
+                        <a class="collapse-item" href="{{ route('admin.property_photos.create') }}">Add New</a>
                     </div>
                 </div>
             </li>
 
           <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-file"></i>
-                    <span>News</span>
-                </a>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="buttons.html">All News</a>
-                        <a class="collapse-item" href="cards.html">Add New</a>
-                    </div>
-                </div>
-            </li>
-
-            <hr class="sidebar-divider my-0">
-
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-shopping-cart"></i>
-                    <span>Orders</span></a>
-            </li>
-
-            <hr class="sidebar-divider my-0">
-
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-money-bill"></i>
-                    <span>Payemnts</span></a>
-            </li>
-
-            <hr class="sidebar-divider my-0">
-
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Users</span></a>
-            </li>
-
             <hr class="sidebar-divider my-0">
 
             <!-- Divider -->

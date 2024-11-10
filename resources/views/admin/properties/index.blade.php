@@ -1,17 +1,17 @@
 @extends('admin.master')
 
-@section('title','All Properties | ' . env('APP_NAME'))
+@section('title', 'All Properties | ' . env('APP_NAME'))
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3 mb-4 text-gray-800">All properties</h1>
+        <h1 class="h3 mb-4 text-gray-800">All Properties</h1>
         <a href="{{ route('admin.properties.create') }}" class="btn btn-success px-5">Add New</a>
     </div>
 
     @if (session('msg'))
-       <div class="alert alert-{{ session('type') }}">
-        {{ session('msg') }}
-       </div>
+        <div class="alert alert-{{ session('type') }}">
+            {{ session('msg') }}
+        </div>
     @endif
 
     <table class="table table-bordered table-hover table-striped">
@@ -26,23 +26,31 @@
             <th>Actions</th>
         </tr>
 
-        @foreach ($properties as $property)
+        @forelse ($properties as $property)
             <tr class="text-center ">
                 <td>{{ $property->id }}</td>
                 <td>{{ $property->property_type }}</td>
                 <td>{{ $property->price }}</td>
                 <td>{{ $property->address }}</td>
                 <td>
-                    @if(!empty($property->main_image))
-                        <img src="{{ asset('uploads/' . $property->main_image) }}" alt="Property Image" width="80">
+                    @if (!empty($property->main_image))
+                        <img src="{{ asset('uploads/' . $property->main_image) }}" alt="Property Image" width="80" height="40">
                     @else
                         <span>Not Found Image</span>
                     @endif
                 </td>
-                <td>{{ $property->listing_status }}</td>
+                <td class="text-center">
+                    @if ($property->listing_status == 'sold')
+                        <span class="badge bg-danger text-white w-50 py-2">Sold</span>
+                    @elseif ($property->listing_status == 'available')
+                        <span class="badge bg-success text-white w-50 py-2">Available</span>
+                    @elseif ($property->listing_status == 'pending')
+                        <span class="badge bg-warning text-white w-50 py-2">Pending</span>
+                    @endif
+                </td>
                 <td>{{ $property->date_listed }}</td>
                 <td>
-                    <a  href="{{ route('admin.properties.edit',$property->id) }}" class="btn btn-sm btn-primary">
+                    <a href="{{ route('admin.properties.edit',$property->id) }}" class="btn btn-sm btn-primary">
                         <i class="fas fa-edit"></i>
                     </a>
                     <form class="d-inline" action="{{ route('admin.properties.destroy',$property->id) }}" method="POST">
@@ -54,9 +62,12 @@
                     </form>
                 </td>
             </tr>
-        @endforeach
+        @empty
+            <tr>
+                <td colspan="8" class="text-center">Not Data Found</td>
+            </tr>
+        @endforelse
     </table>
 
     {{ $properties->links() }}
 @stop
-
