@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin\PropertyPhotosController;
 |
 */
 
-Route::prefix('admin')->name('admin.')->group(function(){
+Route::prefix('admin')->name('admin.')->middleware('auth','check_user')->group(function(){
     Route::get('/',[AdminController::class,'index'])->name('index');
     Route::resource('properties', PropertyController::class);
     Route::resource('property_photos', PropertyPhotosController::class);

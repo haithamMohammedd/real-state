@@ -16,7 +16,7 @@
         </div>
     @endif
 
-    @include('admin.errors')
+    @include('admin.partial.errors')
     <form action="{{ route('admin.property_photos.update', $photo->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')

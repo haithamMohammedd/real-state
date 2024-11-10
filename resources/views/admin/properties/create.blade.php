@@ -8,7 +8,7 @@
         <a href="{{ route('admin.properties.index') }}" class="btn btn-success px-5">All Properties</a>
     </div>
 
-    @include('admin.errors')
+    @include('admin.partial.errors')
 
     <form action="{{ route('admin.properties.store') }}" method="POST" enctype="multipart/form-data">
         @csrf

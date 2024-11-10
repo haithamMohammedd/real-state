@@ -9,9 +9,17 @@
     </div>
 
     @if (session('msg'))
-        <div class="alert alert-{{ session('type') }}">
-            {{ session('msg') }}
-        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: '{{ session('msg') }}',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            });
+        </script>
     @endif
 
     <table class="table table-bordered table-hover table-striped">
@@ -34,7 +42,8 @@
                 <td>{{ $property->address }}</td>
                 <td>
                     @if (!empty($property->main_image))
-                        <img src="{{ asset('uploads/' . $property->main_image) }}" alt="Property Image" width="80" height="40">
+                        <img src="{{ asset('uploads/' . $property->main_image) }}" alt="Property Image" width="80"
+                            height="40">
                     @else
                         <span>Not Found Image</span>
                     @endif
@@ -50,13 +59,13 @@
                 </td>
                 <td>{{ $property->date_listed }}</td>
                 <td>
-                    <a href="{{ route('admin.properties.edit',$property->id) }}" class="btn btn-sm btn-primary">
+                    <a href="{{ route('admin.properties.edit', $property->id) }}" class="btn btn-sm btn-primary">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <form class="d-inline" action="{{ route('admin.properties.destroy',$property->id) }}" method="POST">
+                    <form id="delete-form-1" class="d-inline" action="{{ route('admin.properties.destroy', $property->id) }}" method="POST">
                         @csrf
                         @method('delete')
-                        <button onclick="confirm('Are you sure?')" class="btn btn-sm btn-danger">
+                        <button onclick="confirmDelete(event, 'delete-form-1')" class="btn btn-sm btn-danger">
                             <i class="fas fa-times"></i>
                         </button>
                     </form>
@@ -70,4 +79,8 @@
     </table>
 
     {{ $properties->links() }}
+@stop
+
+@section('script')
+    @include('admin.partial.sweataleart')
 @stop

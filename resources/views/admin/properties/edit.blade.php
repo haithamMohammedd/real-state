@@ -7,7 +7,7 @@
         <h1 class="h3 mb-4 text-gray-800">Edit Properties</h1>
         <a href="{{ route('admin.properties.index') }}" class="btn btn-success px-5">All properties</a>
     </div>
-    @include('admin.errors')
+    @include('admin.partial.errors')
     <form action="{{ route('admin.properties.update', $property->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('put')

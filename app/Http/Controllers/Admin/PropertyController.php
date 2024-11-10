@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Property;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\PropertyPhoto;
 use Illuminate\Support\Facades\File;
 
 class PropertyController extends Controller
@@ -140,8 +141,9 @@ class PropertyController extends Controller
     {
         $property = Property::findOrFail($id);
         File::delete(public_path('uploads/'.$property->image));
+
         $property->delete();
 
-        return redirect()->route('admin.properties.index')->with('msg','Property created successfully')->with('type','danger');
+        return redirect()->route('admin.properties.index')->with('msg','Property deleted successfully')->with('type','danger');
     }
 }

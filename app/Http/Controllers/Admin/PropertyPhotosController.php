@@ -122,6 +122,6 @@ class PropertyPhotosController extends Controller
         File::delete(public_path('uploads/'.$photos->image));
         $photos->delete();
 
-        return redirect()->route('admin.property_photos.index')->with('msg','PropertyPhoto created successfully')->with('type','danger');
+        return redirect()->route('admin.property_photos.index')->with('msg','PropertyPhoto deleted successfully')->with('type','danger');
     }
 }

@@ -9,9 +9,17 @@
     </div>
 
     @if (session('msg'))
-        <div class="alert alert-{{ session('type') }}">
-            {{ session('msg') }}
-        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: '{{ session('msg') }}',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            });
+        </script>
     @endif
 
     <table class="table table-bordered table-hover table-striped">
@@ -32,7 +40,7 @@
                 <td>{{ $photo->description }}</td>
                 <td>
                     @if (!empty($photo->photo_path))
-                    <img src="{{ asset($photo->photo_path) }}" alt="Property Photo" width="80" height="40">
+                        <img src="{{ asset($photo->photo_path) }}" alt="Property Photo" width="80" height="40">
                     @else
                         <span>Not Found Image</span>
                     @endif
@@ -50,12 +58,16 @@
                     </form>
                 </td>
             </tr>
-            @empty
-                <tr>
-                    <td colspan="8" class="text-center">Not Data Found</td>
-                </tr>
-            @endforelse
-        </table>
+        @empty
+            <tr>
+                <td colspan="8" class="text-center">Not Data Found</td>
+            </tr>
+        @endforelse
+    </table>
 
-        {{ $photos->links() }}
-    @stop
+    {{ $photos->links() }}
+@stop
+
+@section('script')
+    @include('admin.partial.sweataleart')
+@stop

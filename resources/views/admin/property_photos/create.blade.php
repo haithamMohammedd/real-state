@@ -14,7 +14,7 @@
         </div>
     @endif
 
-    @include('admin.errors')
+    @include('admin.partial.errors')
     <form action="{{ route('admin.property_photos.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
@@ -35,7 +35,7 @@
 
         <div class="mb-3">
             <label for="description" class="form-label">Photo Description (Optional)</label>
-            <textarea name="description" id="description" rows="3" class="form-control">value="{{ old('description') }}</textarea>
+            <textarea name="description" id="description" rows="3" class="form-control">{{ old('description') }}</textarea>
         </div>
 
         <button type="submit" class="btn btn-primary">Add Photo</button>
