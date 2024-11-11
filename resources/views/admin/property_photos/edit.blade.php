@@ -49,6 +49,6 @@
             <textarea name="description" id="description" rows="3" class="form-control">{{ old('description', $photo->description) }}</textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary">Update Photo</button>
+        <button class="btn btn-success px-5"> <i class="fas fa-check"></i> Update Photo</button>
     </form>
 @endsection

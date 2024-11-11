@@ -2,8 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AgentsController;
 use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\PropertyPhotosController;
+use App\Http\Controllers\Admin\ReviewsController;
+use App\Models\Review;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +23,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth','check_user')->group(f
     Route::get('/',[AdminController::class,'index'])->name('index');
     Route::resource('properties', PropertyController::class);
     Route::resource('property_photos', PropertyPhotosController::class);
+    Route::resource('agents', AgentsController::class);
+    Route::resource('reviews', ReviewsController::class);
 });

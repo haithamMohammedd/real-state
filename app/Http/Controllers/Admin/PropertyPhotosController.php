@@ -77,51 +77,49 @@ class PropertyPhotosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'photos_type' => 'required',
+            'property_id' => 'required|exists:properties,id',
+            'photo_path' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'description' => 'nullable|string|max:255',
         ]);
 
-        $photos = PropertyPhoto::findOrFail($id);
+        $photo = PropertyPhoto::findOrFail($id);
+        $img_name = $photo->photo_path;
 
-        $img_name = $photos->main_image;
+        if ($request->hasFile('photo_path')) {
+            if (File::exists(public_path($img_name))) {
+                File::delete(public_path($img_name));
+            }
 
-        if($request->hasFile('main_image'))
-        {
-            $img_name = rand().time().$request->file('main_image')->getClientOriginalName();
-
-            $request->file('main_image')->move(public_path('uploads'),$img_name);
+            $img_name = 'uploads/property_photos/' . time() . '_' . $request->file('photo_path')->getClientOriginalName();
+            $request->file('photo_path')->move(public_path('uploads/property_photos'), $img_name);
         }
 
-        $photos->update([
-            'photos_type' => $request->photos_type,
-            'address' => $request->address,
-            'city' => $request->city,
-            'state' => $request->state,
-            'zip_code' => $request->zip_code,
-            'price' => $request->price,
-            'bed_rooms' => $request->bed_rooms,
-            'bath_rooms' => $request->bath_rooms,
-            'square_footage' => $request->square_footage,
-            'year_built' => $request->year_built,
-            'listing_status' => $request->listing_status,
-            'date_listed' => $request->date_listed,
-            'main_image' => $img_name,
+        $photo->update([
+            'property_id' => $request->property_id,
+            'photo_path' => $img_name,
+            'description' => $request->description,
         ]);
 
-        return redirect()->route('admin.property_photos.index')->with('msg','PropertyPhoto updated successfully')->with('type','info');
+        return redirect()->route('admin.property_photos.index')->with('msg', 'Photo updated successfully')->with('type', 'info');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        $photos = PropertyPhoto::findOrFail($id);
-        File::delete(public_path('uploads/'.$photos->image));
-        $photos->delete();
+        $photo = PropertyPhoto::findOrFail($id);
 
-        return redirect()->route('admin.property_photos.index')->with('msg','PropertyPhoto deleted successfully')->with('type','danger');
+        if (File::exists(public_path($photo->photo_path))) {
+            File::delete(public_path($photo->photo_path));
+        }
+
+        $photo->delete();
+
+        return redirect()->route('admin.property_photos.index')->with('msg', 'Photo deleted successfully')->with('type', 'danger');
     }
 }
+

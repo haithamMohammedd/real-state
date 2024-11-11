@@ -38,6 +38,6 @@
             <textarea name="description" id="description" rows="3" class="form-control">{{ old('description') }}</textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary">Add Photo</button>
+        <button class="btn btn-success px-5"> <i class="fas fa-check"></i> Add Photo</button>
     </form>
 @endsection

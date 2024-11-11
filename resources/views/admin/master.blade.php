@@ -92,6 +92,40 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+                    aria-expanded="true" aria-controls="collapseThree">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Agents</span>
+                </a>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('admin.agents.index') }}">All Agents</a>
+                        <a class="collapse-item" href="{{ route('admin.agents.create') }}">Add New</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+                    aria-expanded="true" aria-controls="collapseFour">
+                    <i class="fas fa-fw fa-star"></i>
+                    <span>Reviews</span>
+                </a>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('admin.reviews.index') }}">All Reviews</a>
+                        <a class="collapse-item" href="{{ route('admin.reviews.create') }}">Add New</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
