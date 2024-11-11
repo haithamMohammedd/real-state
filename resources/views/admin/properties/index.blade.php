@@ -22,13 +22,15 @@
         </script>
     @endif
 
+
     <table class="table table-bordered table-hover table-striped">
         <tr class="bg-dark text-white text-center">
             <th>ID</th>
             <th>Prperty Type</th>
+            <th>ZIP Code</th>
             <th>Price</th>
-            <th>Address</th>
             <th>Image</th>
+            <th>City</th>
             <th>Listing Status</th>
             <th>Date Listed</th>
             <th>Actions</th>
@@ -38,8 +40,8 @@
             <tr class="text-center ">
                 <td>{{ $property->id }}</td>
                 <td>{{ $property->property_type }}</td>
+                <td>{{ $property->zip_code }}</td>
                 <td>{{ $property->price }}</td>
-                <td>{{ $property->address }}</td>
                 <td>
                     @if (!empty($property->main_image))
                         <img src="{{ asset('uploads/' . $property->main_image) }}" alt="Property Image" width="80"
@@ -48,6 +50,7 @@
                         <span>Not Found Image</span>
                     @endif
                 </td>
+                <td>{{ $property->city }}</td>
                 <td class="text-center">
                     @if ($property->listing_status == 'sold')
                         <span class="badge bg-danger text-white w-50 py-2">Sold</span>

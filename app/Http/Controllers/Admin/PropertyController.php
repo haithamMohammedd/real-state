@@ -73,8 +73,8 @@ class PropertyController extends Controller
 
 
         return redirect()->route('admin.properties.index')
-                         ->with('msg', 'Property created successfully')
-                         ->with('type', 'success');
+            ->with('msg', 'Property created successfully')
+            ->with('type', 'success');
     }
 
     /**
@@ -92,7 +92,7 @@ class PropertyController extends Controller
     {
         $property = Property::findOrFail($id);
 
-        return view('admin.properties.edit',compact('property'));
+        return view('admin.properties.edit', compact('property'));
     }
 
     /**
@@ -108,11 +108,10 @@ class PropertyController extends Controller
 
         $img_name = $property->main_image;
 
-        if($request->hasFile('main_image'))
-        {
-            $img_name = rand().time().$request->file('main_image')->getClientOriginalName();
+        if ($request->hasFile('main_image')) {
+            $img_name = rand() . time() . $request->file('main_image')->getClientOriginalName();
 
-            $request->file('main_image')->move(public_path('uploads'),$img_name);
+            $request->file('main_image')->move(public_path('uploads'), $img_name);
         }
 
         $property->update([
@@ -131,7 +130,7 @@ class PropertyController extends Controller
             'main_image' => $img_name,
         ]);
 
-        return redirect()->route('admin.properties.index')->with('msg','Property updated successfully')->with('type','info');
+        return redirect()->route('admin.properties.index')->with('msg', 'Property updated successfully')->with('type', 'info');
     }
 
     /**
@@ -140,10 +139,28 @@ class PropertyController extends Controller
     public function destroy(string $id)
     {
         $property = Property::findOrFail($id);
-        File::delete(public_path('uploads/'.$property->image));
+        File::delete(public_path('uploads/' . $property->image));
 
         $property->delete();
 
-        return redirect()->route('admin.properties.index')->with('msg','Property deleted successfully')->with('type','danger');
+        return redirect()->route('admin.properties.index')->with('msg', 'Property deleted successfully')->with('type', 'danger');
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+
+        if ($request->has('query')) {
+            $query = $request->input('query');
+            $properties = Property::where('city', 'LIKE', '%' . $query . '%')
+                                  ->orWhere('zip_code', 'LIKE', '%' . $query . '%')
+                                  ->paginate(10);
+        } else {
+            
+            $properties = Property::paginate(10);
+        }
+
+        return view('admin.properties.index', compact('properties'));
     }
 }

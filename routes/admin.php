@@ -19,9 +19,11 @@ use App\Models\Review;
 |
 */
 
-Route::prefix('admin')->name('admin.')->middleware('auth','check_user')->group(function(){
-    Route::get('/',[AdminController::class,'index'])->name('index');
+Route::prefix('admin')->name('admin.')->middleware('auth', 'check_user')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('index');
     Route::resource('properties', PropertyController::class);
+    Route::get('/admin/properties/search', [PropertyController::class, 'search'])->name('properties.search');
+
     Route::resource('property_photos', PropertyPhotosController::class);
     Route::resource('agents', AgentsController::class);
     Route::resource('reviews', ReviewsController::class);
