@@ -32,7 +32,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/') }}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('site.index') }}">
                 <div class="sidebar-brand-icon">
                     <i class="fas fa-home"></i>
                 </div>
@@ -199,7 +199,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span
-                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name ?? '' }}</span>
+                                    class="text-capitalize text-capitalize-first mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name ?? '' }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="https://ui-avatars.com/api/?name={{ Auth::user()->name ?? '' }}">
                             </a>
