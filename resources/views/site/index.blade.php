@@ -3,6 +3,32 @@
 @section('title', 'Home | ' . env('APP_NAME'))
 
 @section('content')
+    <div class="hero">
+        <div class="hero-slide">
+            <div class="img overlay" style="background-image: url('{{ asset('siteassets/images/hero_bg_3.jpg') }}')">
+            </div>
+            <div class="img overlay" style="background-image: url('{{ asset('siteassets/images/hero_bg_2.jpg') }}')">
+            </div>
+            <div class="img overlay" style="background-image: url('{{ asset('siteassets/images/hero_bg_1.jpg') }}')">
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-lg-9 text-center">
+                    <h1 class="heading" data-aos="fade-up">
+                        Easiest way to find your dream home
+                    </h1>
+                    <form action="#" class="narrow-w form-search d-flex align-items-stretch mb-3" data-aos="fade-up"
+                        data-aos-delay="200">
+                        <input type="text" class="form-control px-4"
+                            placeholder="Your ZIP code or City. e.g. New York" />
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="section">
         <div class="container">
             <div class="row mb-5 align-items-center">
@@ -13,7 +39,8 @@
                 </div>
                 <div class="col-lg-6 text-lg-end">
                     <p>
-                        <a href="#" target="_blank" class="btn btn-primary text-white py-3 px-4">View all properties</a>
+                        <a href="{{ route('site.properties') }}" target="_blank" class="btn btn-primary text-white py-3 px-4">View all
+                            properties</a>
                     </p>
                 </div>
             </div>
@@ -76,34 +103,34 @@
                 <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
                     <div class="box-feature">
                         <span class="flaticon-house"></span>
-                        <h3 class="mb-3">Our Properties</h3>
+                        <h3 class="mb-3">Featured Properties</h3>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             Voluptates, accusamus.
                         </p>
-                        <p><a href="#" class="learn-more">Learn More</a></p>
+                        <p><a href="{{ route('site.properties') }}" class="learn-more">Learn More</a></p>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="500">
                     <div class="box-feature">
                         <span class="flaticon-building"></span>
-                        <h3 class="mb-3">Property for Sale</h3>
+                        <h3 class="mb-3">Buy Property</h3>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             Voluptates, accusamus.
                         </p>
-                        <p><a href="#" class="learn-more">Learn More</a></p>
+                        <p><a href="{{ route('site.properties') }}" class="learn-more">Learn More</a></p>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
                     <div class="box-feature">
                         <span class="flaticon-house-3"></span>
-                        <h3 class="mb-3">Real Estate Agent</h3>
+                        <h3 class="mb-3">Our Properties</h3>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             Voluptates, accusamus.
                         </p>
-                        <p><a href="#" class="learn-more">Learn More</a></p>
+                        <p><a href="{{ route('site.properties') }}" class="learn-more">Learn More</a></p>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="600">
@@ -131,9 +158,10 @@
                 </div>
                 <div class="col-md-6 text-md-end">
                     <div id="testimonial-nav">
-                        <span class="prev" data-controls="prev">Prev</span>
-
-                        <span class="next" data-controls="next">Next</span>
+                        <button class="custom-button prev" data-controls="prev" aria-controls="property"
+                        tabindex="-1">Prev</button>
+                    <button class="custom-button next" data-controls="next" aria-controls="property"
+                        tabindex="-1">Next</button>
                     </div>
                 </div>
             </div>
@@ -143,101 +171,30 @@
             </div>
             <div class="testimonial-slider-wrap">
                 <div class="testimonial-slider">
-                    <div class="item">
-                        <div class="testimonial">
-                            <img src="{{ asset('siteassets/images/person_1-min.jpg') }}" alt="Image"
-                                class="img-fluid rounded-circle w-25 mb-4" />
-                            <div class="rate">
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
+                    @foreach ($reviews as $review)
+                        <div class="item">
+                            <div class="testimonial">
+                                <img src="{{ asset($review->image) }}" alt="Image"
+                                    class="img-fluid rounded-circle w-25 mb-4" />
+                                <div class="rate">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= $review->stars)
+                                            <span class="icon-star text-warning"></span> <!-- نجمة ملونة -->
+                                        @else
+                                            <span class="icon-star text-gray"></span> <!-- نجمة غير ملونة -->
+                                        @endif
+                                    @endfor
+                                </div>
+                                <h3 class="h5 text-primary mb-4">{{ $review->name }}</h3>
+                                <blockquote>
+                                    <p>
+                                        &ldquo;{{ Str::limit($review->description, 250, '...') }}&rdquo;
+                                    </p>
+                                </blockquote>
+                                <p class="text-black-50">{{ $review->job }}</p>
                             </div>
-                            <h3 class="h5 text-primary mb-4">James Smith</h3>
-                            <blockquote>
-                                <p>
-                                    &ldquo;Far far away, behind the word mountains, far from the
-                                    countries Vokalia and Consonantia, there live the blind
-                                    texts. Separated they live in Bookmarksgrove right at the
-                                    coast of the Semantics, a large language ocean.&rdquo;
-                                </p>
-                            </blockquote>
-                            <p class="text-black-50">Designer, Co-founder</p>
                         </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="testimonial">
-                            <img src="{{ asset('siteassets/images/person_2-min.jpg') }}" alt="Image"
-                                class="img-fluid rounded-circle w-25 mb-4" />
-                            <div class="rate">
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                            </div>
-                            <h3 class="h5 text-primary mb-4">Mike Houston</h3>
-                            <blockquote>
-                                <p>
-                                    &ldquo;Far far away, behind the word mountains, far from the
-                                    countries Vokalia and Consonantia, there live the blind
-                                    texts. Separated they live in Bookmarksgrove right at the
-                                    coast of the Semantics, a large language ocean.&rdquo;
-                                </p>
-                            </blockquote>
-                            <p class="text-black-50">Designer, Co-founder</p>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="testimonial">
-                            <img src="{{ asset('siteassets/images/person_3-min.jpg') }}" alt="Image"
-                                class="img-fluid rounded-circle w-25 mb-4" />
-                            <div class="rate">
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                            </div>
-                            <h3 class="h5 text-primary mb-4">Cameron Webster</h3>
-                            <blockquote>
-                                <p>
-                                    &ldquo;Far far away, behind the word mountains, far from the
-                                    countries Vokalia and Consonantia, there live the blind
-                                    texts. Separated they live in Bookmarksgrove right at the
-                                    coast of the Semantics, a large language ocean.&rdquo;
-                                </p>
-                            </blockquote>
-                            <p class="text-black-50">Designer, Co-founder</p>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="testimonial">
-                            <img src="{{ asset('siteassets/images/person_4-min.jpg') }}" alt="Image"
-                                class="img-fluid rounded-circle w-25 mb-4" />
-                            <div class="rate">
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                            </div>
-                            <h3 class="h5 text-primary mb-4">Dave Smith</h3>
-                            <blockquote>
-                                <p>
-                                    &ldquo;Far far away, behind the word mountains, far from the
-                                    countries Vokalia and Consonantia, there live the blind
-                                    texts. Separated they live in Bookmarksgrove right at the
-                                    coast of the Semantics, a large language ocean.&rdquo;
-                                </p>
-                            </blockquote>
-                            <p class="text-black-50">Designer, Co-founder</p>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -457,45 +414,4 @@
 
 @stop
 
-@section('style')
-    <!-- Slick CSS -->
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
-
-    <style>
-        .custom-button {
-            background-color: #f1f3f5;
-            color: #333;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .custom-button:hover {
-            background-color: #00204a !important;;
-            color: #fff !important;;
-        }
-    </style>
-@stop
-
-@section('script')
-    <!-- Slick JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $('.property-slider').slick({
-                slidesToShow: 3, // عدد المنتجات التي تظهر في وقت واحد
-                slidesToScroll: 1, // عدد المنتجات التي تتحرك مع كل نقرة
-                prevArrow: $('.prev'), // ربط زر Prev
-                nextArrow: $('.next'), // ربط زر Next
-                infinite: false, // لتعطيل التحريك اللانهائي
-            });
-        });
-    </script>
-@stop
+@include('site.partials.show_next_prevouis')

@@ -49,10 +49,10 @@
                     <a href="{{ route('admin.agents.edit', $agent->id) }}" class="btn btn-sm btn-primary">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <form id="delete-form-1" class="d-inline" action="{{ route('admin.agents.destroy', $agent->id) }}" method="POST">
+                    <form id="delete-{{ $agent->id }}" class="d-inline" action="{{ route('admin.agents.destroy', $agent->id) }}" method="POST">
                         @csrf
                         @method('delete')
-                        <button onclick="confirmDelete(event, 'delete-form-1')" class="btn btn-sm btn-danger">
+                        <button onclick="confirmDelete(event, 'delete-{{ $agent->id }}')" class="btn btn-sm btn-danger">
                             <i class="fas fa-times"></i>
                         </button>
                     </form>

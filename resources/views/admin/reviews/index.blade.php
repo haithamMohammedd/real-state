@@ -38,7 +38,7 @@
                 <td>{{ $review->id }}</td>
                 <td>{{ $review->name }}</td>
                 <td>{{ $review->job }}</td>
-                <td>{{ $review->description }}</td>
+                <td>{{ Str::limit($review->description, 50, '...') }}</td>
                 <td>{{ $review->stars }}</td>
                 <td>
                     @if (!empty($review->image))
@@ -51,10 +51,10 @@
                     <a href="{{ route('admin.reviews.edit', $review->id) }}" class="btn btn-sm btn-primary">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <form id="delete-form-1" class="d-inline" action="{{ route('admin.reviews.destroy', $review->id) }}" method="POST">
+                    <form id="delete-form-{{ $review->id }}" class="d-inline" action="{{ route('admin.reviews.destroy', $review->id) }}" method="POST">
                         @csrf
                         @method('delete')
-                        <button onclick="confirmDelete(event, 'delete-form-1')" class="btn btn-sm btn-danger">
+                        <button onclick="confirmDelete(event, 'delete-form-{{ $review->id }}')" class="btn btn-sm btn-danger">
                             <i class="fas fa-times"></i>
                         </button>
                     </form>
