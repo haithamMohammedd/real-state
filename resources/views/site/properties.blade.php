@@ -85,54 +85,7 @@
 
     <div class="section section-properties">
         <div class="container">
-            <div class="row">
-                @foreach ($properties as $property)
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                        <div class="property-item mb-30">
-                            <a href="property-single.html" class="img">
-                                <img src="{{ asset('uploads/' . $property->main_image) }}" alt="Image"
-                                    class="img-fluid" />
-                            </a>
-
-                            <div class="property-content">
-                                <div class="price mb-2"><span>${{ $property->price }}</span></div>
-                                <div>
-                                    <span class="d-block mb-2 text-black-50">{{ $property->address }},
-                                        {{ $property->city }}, {{ $property->state }}
-                                        {{ $property->zip_code }}</span>
-                                    <span class="city d-block mb-3">{{ $property->address }},
-                                        {{ $property->city }}</span>
-
-                                    <div class="specs d-flex mb-4">
-                                        <span class="d-block d-flex align-items-center me-3">
-                                            <span class="icon-bed me-2"></span>
-                                            <span class="caption">{{ $property->bed_rooms }} beds</span>
-                                        </span>
-                                        <span class="d-block d-flex align-items-center">
-                                            <span class="icon-bath me-2"></span>
-                                            <span class="caption">{{ $property->bath_rooms }} baths</span>
-                                        </span>
-                                    </div>
-
-                                    <a href="property-single.html" class="btn btn-primary py-2 px-3">See details</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-            {{-- <div class="row align-items-center py-5">
-                <div class="col-lg-3">Pagination (1 of 10)</div>
-                <div class="col-lg-6 text-center">
-                    <div class="custom-pagination">
-                        <a href="#">1</a>
-                        <a href="#" class="active">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                    </div>
-                </div>
-            </div> --}}
+            @include('site.partials.show_properties')
             {{ $properties->links() }}
         </div>
     </div>

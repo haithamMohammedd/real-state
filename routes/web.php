@@ -27,4 +27,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::prefix('site')->name('site.')->group(function () {
     Route::get('/',[SiteController::class,'index'])->name('index');
     Route::get('/properties',[SiteController::class,'properties'])->name('properties');
+    Route::get('/search-properties',[SiteController::class,'search_properties'])->name('search_properties');
+    Route::get('properties/{id}', [SiteController::class, 'show'])->name('show');
 });

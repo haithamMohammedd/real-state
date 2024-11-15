@@ -19,12 +19,14 @@
                     <h1 class="heading" data-aos="fade-up">
                         Easiest way to find your dream home
                     </h1>
-                    <form action="#" class="narrow-w form-search d-flex align-items-stretch mb-3" data-aos="fade-up"
+                    <form action="{{ route('site.search_properties') }}" method="GET"
+                        class="narrow-w form-search d-flex align-items-stretch mb-3" data-aos="fade-up"
                         data-aos-delay="200">
-                        <input type="text" class="form-control px-4"
+                        <input type="text" name="query" class="form-control px-4"
                             placeholder="Your ZIP code or City. e.g. New York" />
                         <button type="submit" class="btn btn-primary">Search</button>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -39,7 +41,8 @@
                 </div>
                 <div class="col-lg-6 text-lg-end">
                     <p>
-                        <a href="{{ route('site.properties') }}" target="_blank" class="btn btn-primary text-white py-3 px-4">View all
+                        <a href="{{ route('site.properties') }}" target="_blank"
+                            class="btn btn-primary text-white py-3 px-4">View all
                             properties</a>
                     </p>
                 </div>
@@ -51,7 +54,7 @@
 
                             @foreach ($properties as $property)
                                 <div class="property-item">
-                                    <a href="property-single.html" class="img">
+                                    <a href="{{ route('site.show', $property->id) }}" class="img">
                                         <img src="{{ asset('uploads/' . $property->main_image) }}" alt="Image"
                                             class="img-fluid" />
                                     </a>
@@ -76,7 +79,8 @@
                                                 </span>
                                             </div>
 
-                                            <a href="property-single.html" class="btn btn-primary py-2 px-3">See details</a>
+                                            <a href="{{ route('site.show', $property->id) }}"
+                                                class="btn btn-primary py-2 px-3">See details</a>
                                         </div>
                                     </div>
                                 </div>
@@ -159,9 +163,9 @@
                 <div class="col-md-6 text-md-end">
                     <div id="testimonial-nav">
                         <button class="custom-button prev" data-controls="prev" aria-controls="property"
-                        tabindex="-1">Prev</button>
-                    <button class="custom-button next" data-controls="next" aria-controls="property"
-                        tabindex="-1">Next</button>
+                            tabindex="-1">Prev</button>
+                        <button class="custom-button next" data-controls="next" aria-controls="property"
+                            tabindex="-1">Next</button>
                     </div>
                 </div>
             </div>
@@ -415,3 +419,4 @@
 @stop
 
 @include('site.partials.show_next_prevouis')
+
