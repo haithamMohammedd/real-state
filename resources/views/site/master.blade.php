@@ -55,11 +55,10 @@
                             <a href="{{ route('site.properties') }}">Properties</a>
                             <ul class="dropdown">
                                 <li><a href="{{ route('site.properties') }}">Buy Property</a></li>
-                                <li><a href="#">Sell Property</a></li>
+                                <li><a href="{{ route('site.properties') }}">Sell Property</a></li>
                             </ul>
                         </li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="{{ route('site.contact_us') }}">Contact Us</a></li>
                     </ul>
 
                     <a href="#"
@@ -196,6 +195,14 @@
     <script src="{{ asset('siteassets/js/navbar.js') }}"></script>
     <script src="{{ asset('siteassets/js/counter.js') }}"></script>
     <script src="{{ asset('siteassets/js/custom.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <script>
+        setTimeout(() => {
+            $('.alert').fadeOut();
+        }, 3000);
+    </script>
     @yield('script')
 </body>
 

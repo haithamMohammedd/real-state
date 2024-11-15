@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Site\SiteController;
 
 /*
@@ -29,4 +30,7 @@ Route::prefix('site')->name('site.')->group(function () {
     Route::get('/properties',[SiteController::class,'properties'])->name('properties');
     Route::get('/search-properties',[SiteController::class,'search_properties'])->name('search_properties');
     Route::get('properties/{id}', [SiteController::class, 'show'])->name('show');
+    Route::get('/agents',[SiteController::class,'agents'])->name('agents');
+    Route::get('/contact-us',[SiteController::class,'contact_us'])->name('contact_us');
+    Route::post('/send', [SiteController::class, 'send'])->name('send');
 });

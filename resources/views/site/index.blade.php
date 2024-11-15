@@ -104,6 +104,17 @@
     <section class="features-1">
         <div class="container">
             <div class="row">
+                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="box-feature">
+                        <span class="flaticon-house-3"></span>
+                        <h3 class="mb-3">Our Properties</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Voluptates, accusamus.
+                        </p>
+                        <p><a href="{{ route('site.properties') }}" class="learn-more">Learn More</a></p>
+                    </div>
+                </div>
                 <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
                     <div class="box-feature">
                         <span class="flaticon-house"></span>
@@ -129,23 +140,12 @@
                 <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
                     <div class="box-feature">
                         <span class="flaticon-house-3"></span>
-                        <h3 class="mb-3">Our Properties</h3>
+                        <h3 class="mb-3">Our Agnets</h3>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             Voluptates, accusamus.
                         </p>
-                        <p><a href="{{ route('site.properties') }}" class="learn-more">Learn More</a></p>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="600">
-                    <div class="box-feature">
-                        <span class="flaticon-house-1"></span>
-                        <h3 class="mb-3">House for Sale</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Voluptates, accusamus.
-                        </p>
-                        <p><a href="#" class="learn-more">Learn More</a></p>
+                        <p><a href="{{ route('site.agents') }}" class="learn-more">Learn More</a></p>
                     </div>
                 </div>
             </div>
@@ -229,7 +229,7 @@
                             <span class="icon-home2"></span>
                         </span>
                         <div class="feature-text">
-                            <h3 class="heading">2M Properties</h3>
+                            <h3 class="heading">{{ $properties->count() }} Properties</h3>
                             <p class="text-black-50">
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                                 Nostrum iste.
@@ -264,28 +264,29 @@
                     </div>
                 </div>
             </div>
-            <div class="row section-counter mt-5">
-                <div class="col-6 col-sm-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+
+            <div class="row section-counter mt-5 ml-5">
+                <div class="col-6 col-sm-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
                     <div class="counter-wrap mb-5 mb-lg-0">
-                        <span class="number"><span class="countup text-primary">3298</span></span>
-                        <span class="caption text-black-50"># of Buy Properties</span>
+                        <span class="number"><span class="countup text-primary" style="visibility: hidden;"></span></span>
+                        <span class="caption text-black-50"></span>
                     </div>
                 </div>
                 <div class="col-6 col-sm-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
                     <div class="counter-wrap mb-5 mb-lg-0">
-                        <span class="number"><span class="countup text-primary">2181</span></span>
+                        <span class="number"><span class="countup text-primary">{{ $soldPropertiesCount }}</span></span>
                         <span class="caption text-black-50"># of Sell Properties</span>
                     </div>
                 </div>
                 <div class="col-6 col-sm-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="500">
                     <div class="counter-wrap mb-5 mb-lg-0">
-                        <span class="number"><span class="countup text-primary">9316</span></span>
+                        <span class="number"><span class="countup text-primary">{{ $properties->count() }}</span></span>
                         <span class="caption text-black-50"># of All Properties</span>
                     </div>
                 </div>
                 <div class="col-6 col-sm-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="600">
                     <div class="counter-wrap mb-5 mb-lg-0">
-                        <span class="number"><span class="countup text-primary">7191</span></span>
+                        <span class="number"><span class="countup text-primary">{{ $agents->count() }}</span></span>
                         <span class="caption text-black-50"># of Agents</span>
                     </div>
                 </div>
@@ -312,7 +313,7 @@
             <div class="row justify-content-center text-center mb-5">
                 <div class="col-lg-6 mb-5">
                     <h2 class="font-weight-bold heading text-primary mb-4">
-                        Our Agents
+                        Best Agents
                     </h2>
                     <p class="text-black-50">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
@@ -322,101 +323,42 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
-                    <div class="h-100 person">
-                        <img src="{{ asset('siteassets/images/person_1-min.jpg') }}" alt="Image" class="img-fluid" />
+                @foreach ($agents as $agent)
+                    <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
+                        <div class="h-100 person">
+                            <img src="{{ asset($agent->image) }}" alt="Image"
+                                class="img-fluid" />
 
-                        <div class="person-contents">
-                            <h2 class="mb-0"><a href="#">James Doe</a></h2>
-                            <span class="meta d-block mb-3">Real Estate Agent</span>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Facere officiis inventore cumque tenetur laboriosam, minus
-                                culpa doloremque odio, neque molestias?
-                            </p>
+                            <div class="person-contents">
+                                <h2 class="mb-0"><a href="#">{{ $agent->name }}</a></h2>
+                                <span class="meta d-block mb-3">Real Estate Agent</span>
+                                <p>
+                                    {{ Str::limit($agent->description, 250, '...') }}
+                                </p>
 
-                            <ul class="social list-unstyled list-inline dark-hover">
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-twitter"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-facebook"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-linkedin"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-instagram"></span></a>
-                                </li>
-                            </ul>
+                                <ul class="social list-unstyled list-inline dark-hover">
+                                    <li class="list-inline-item">
+                                        <a href="#"><span class="icon-twitter"></span></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="#"><span class="icon-facebook"></span></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="#"><span class="icon-linkedin"></span></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="#"><span class="icon-instagram"></span></a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
-                    <div class="h-100 person">
-                        <img src="{{ asset('siteassets/images/person_2-min.jpg') }}" alt="Image" class="img-fluid" />
-
-                        <div class="person-contents">
-                            <h2 class="mb-0"><a href="#">Jean Smith</a></h2>
-                            <span class="meta d-block mb-3">Real Estate Agent</span>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Facere officiis inventore cumque tenetur laboriosam, minus
-                                culpa doloremque odio, neque molestias?
-                            </p>
-
-                            <ul class="social list-unstyled list-inline dark-hover">
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-twitter"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-facebook"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-linkedin"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-instagram"></span></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
-                    <div class="h-100 person">
-                        <img src="{{ asset('siteassets/images/person_3-min.jpg') }}" alt="Image" class="img-fluid" />
-
-                        <div class="person-contents">
-                            <h2 class="mb-0"><a href="#">Alicia Huston</a></h2>
-                            <span class="meta d-block mb-3">Real Estate Agent</span>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Facere officiis inventore cumque tenetur laboriosam, minus
-                                culpa doloremque odio, neque molestias?
-                            </p>
-
-                            <ul class="social list-unstyled list-inline dark-hover">
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-twitter"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-facebook"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-linkedin"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-instagram"></span></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
+
     </div>
 
 @stop
 
 @include('site.partials.show_next_prevouis')
-
