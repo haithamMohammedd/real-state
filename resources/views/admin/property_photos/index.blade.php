@@ -50,10 +50,10 @@
                     <a href="{{ route('admin.property_photos.edit', $photo->id) }}" class="btn btn-sm btn-primary">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <form id="delete-form-1" class="d-inline" action="{{ route('admin.property_photos.destroy', $photo->id) }}" method="POST">
+                    <form id="delete-{{ $photo->id }}" class="d-inline" action="{{ route('admin.property_photos.destroy', $photo->id) }}" method="POST">
                         @csrf
                         @method('delete')
-                        <button onclick="confirmDelete(event, 'delete-form-1')" class="btn btn-sm btn-danger">
+                        <button onclick="confirmDelete(event, 'delete-{{ $photo->id }}')" class="btn btn-sm btn-danger">
                             <i class="fas fa-times"></i>
                         </button>
                     </form>
