@@ -37,7 +37,6 @@
                 <td>{{ $photo->id }}</td>
                 <td>{{ $photo->property->id }}</td>
                 <td>{{ $photo->property->property_type }}</td>
-                <td>{{ $photo->description }}</td>
                 <td>
                     @if (!empty($photo->photo_path))
                         <img src="{{ asset($photo->photo_path) }}" alt="Property Photo" width="80" height="40">
@@ -45,6 +44,8 @@
                         <span>Not Found Image</span>
                     @endif
                 </td>
+                <td>{{ $photo->description }}</td>
+
                 <td>
                     <a href="{{ route('admin.property_photos.edit', $photo->id) }}" class="btn btn-sm btn-primary">
                         <i class="fas fa-edit"></i>
