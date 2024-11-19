@@ -1,8 +1,8 @@
 <div class="row">
-    @foreach ($properties as $property)
+    @forelse ($properties as $property)
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
             <div class="property-item mb-30">
-                <a href="{{ route('site.show',$property->id) }}" class="img">
+                <a href="{{ route('site.show', $property->id) }}" class="img">
                     <img src="{{ asset('uploads/' . $property->main_image) }}" alt="Image" class="img-fluid" />
                 </a>
 
@@ -23,14 +23,18 @@
                             </span>
                         </div>
 
-                        <a href="{{ route('site.show',$property->id) }}" class="btn btn-primary py-2 px-3">See details</a>
+                        <a href="{{ route('site.show', $property->id) }}" class="btn btn-primary py-2 px-3">See details</a>
                     </div>
                 </div>
-
             </div>
         </div>
-    @endforeach
+    @empty
+        <div class="col-12 text-center">
+            <p class="text-muted">Properties not found</p>
+        </div>
+    @endforelse
 </div>
+
 
 
 @section('script')

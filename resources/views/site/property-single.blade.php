@@ -8,18 +8,11 @@
         <div class="container">
             <div class="row justify-content-center align-items-center">
                 <div class="col-lg-9 text-center mt-5">
-                    <h1 class="heading" data-aos="fade-up">
-                        {{ $property->name }}  <!-- اسم العقار -->
-                    </h1>
-
                     <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="200">
                         <ol class="breadcrumb text-center justify-content-center">
                             <li class="breadcrumb-item"><a href="{{ route('site.index') }}">Home</a></li>
                             <li class="breadcrumb-item">
                                 <a href="{{ route('site.properties') }}">Properties</a>
-                            </li>
-                            <li class="breadcrumb-item active text-white-50" aria-current="page">
-                                {{ $property->name }}
                             </li>
                         </ol>
                     </nav>
@@ -34,7 +27,7 @@
                 <div class="col-lg-7">
                     <div class="img-property-slide-wrap">
                         <div class="img-property-slide">
-                            @foreach ($property->photos as $photo)  <!-- عرض الصور باستخدام العلاقة -->
+                            @foreach ($property->photos as $photo)
                                 <img src="{{ asset($photo->photo_path) }}" alt="Image" class="img-fluid" />
                             @endforeach
                         </div>
@@ -43,34 +36,21 @@
                 <div class="col-lg-4">
                     <h2 class="heading text-primary">{{ $property->name }}</h2>
                     <p class="meta">{{ $property->address }}, {{ $property->city }}</p>
+                    
+                    <!-- Added price -->
+                    <p class="text-success"><strong>Price:</strong> ${{ number_format($property->price, 2) }}</p>
+                    
+                    <!-- Moved name before description -->
+                    <h4 class="text-dark">{{ $property->name }}</h4>
+                    
                     <p class="text-black-50">{{ $property->description }}</p>
 
-                    <div class="d-block agent-box p-5">
-                        <div class="img mb-4">
-                            <img src="{{ asset('siteassets/images/person_2-min.jpg') }}" alt="Image" class="img-fluid" />
-                        </div>
-                        <div class="text">
-                            <h3 class="mb-0">Alicia Huston</h3>
-                            <div class="meta mb-3">Real Estate</div>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Ratione laborum quo quos omnis sed magnam id ducimus saepe
-                            </p>
-                            <ul class="list-unstyled social dark-hover d-flex">
-                                <li class="me-1">
-                                    <a href="#"><span class="icon-instagram"></span></a>
-                                </li>
-                                <li class="me-1">
-                                    <a href="#"><span class="icon-twitter"></span></a>
-                                </li>
-                                <li class="me-1">
-                                    <a href="#"><span class="icon-facebook"></span></a>
-                                </li>
-                                <li class="me-1">
-                                    <a href="#"><span class="icon-linkedin"></span></a>
-                                </li>
-                            </ul>
-                        </div>
+                    <div class="contact-box p-5">
+                        <h4>If you're interested in this property and want to take the next step, please contact us on WhatsApp:</h4>
+                        
+                    
+                        <script src="https://static.elfsight.com/platform/platform.js" async></script>
+                        <div class="elfsight-app-407986da-509b-4d91-a5f2-7559387048c7" data-elfsight-app-lazy></div>
                     </div>
                 </div>
             </div>
@@ -78,5 +58,3 @@
     </div>
 
 @stop
-
-
