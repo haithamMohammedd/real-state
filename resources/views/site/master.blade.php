@@ -54,8 +54,8 @@
                         <li class="has-children">
                             <a href="{{ route('site.properties') }}">Properties</a>
                             <ul class="dropdown">
-                                <li><a href="{{ route('site.search_properties') }}">Buy Property</a></li>
-                                <li><a href="{{ route('site.search_properties') }}">Sell Property</a></li>
+                                <li><a href="{{ route('site.properties') }}">Buy Property</a></li>
+                                <li><a href="https://wa.me/+972597747560">Sell Property</a></li>
                             </ul>
                         </li>
                         <li><a href="{{ route('site.agents') }}">Agents</a></li>
