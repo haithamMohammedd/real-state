@@ -30,7 +30,7 @@
         </div>
     @empty
         <div class="col-12 text-center">
-            <p class="text-muted">Properties not found</p>
+            <p class="text-muted fw-bold">Properties Not Found</p>
         </div>
     @endforelse
 </div>
