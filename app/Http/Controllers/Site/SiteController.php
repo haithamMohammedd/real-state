@@ -58,7 +58,7 @@ class SiteController extends Controller
 
     function agents()
     {
-        $agents = Agent::paginate(6);
+        $agents = Agent::paginate(9);
 
         return view('site.agents', compact('agents'));
     }
@@ -70,7 +70,6 @@ class SiteController extends Controller
 
     public function send(Request $request)
     {
-        // التحقق من صحة البيانات
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',

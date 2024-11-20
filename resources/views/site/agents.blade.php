@@ -13,7 +13,7 @@
                         <ol class="breadcrumb text-center justify-content-center">
                             <li class="breadcrumb-item"><a href="{{ route('site.index') }}">Home</a></li>
                             <li class="breadcrumb-item active text-white-50" aria-current="page">
-                                Properties
+                                agents
                             </li>
                         </ol>
                     </nav>

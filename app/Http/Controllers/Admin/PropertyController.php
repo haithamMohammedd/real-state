@@ -157,7 +157,7 @@ class PropertyController extends Controller
                                   ->orWhere('zip_code', 'LIKE', '%' . $query . '%')
                                   ->paginate(10);
         } else {
-            
+
             $properties = Property::paginate(10);
         }
 
