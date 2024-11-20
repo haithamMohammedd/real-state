@@ -18,7 +18,7 @@ class CheckUserType
     {
         if(Auth::user()->type == 'user')
         {
-            return redirect('/');
+            return redirect('/site');
         }
 
         return $next($request);

@@ -37,7 +37,7 @@
                 <td>{{ $agent->id }}</td>
                 <td>{{ $agent->name }}</td>
                 <td>{{ $agent->job }}</td>
-                <td>{{ $agent->description }}</td>
+                <td>{{ Str::limit($agent->description, 50, '...') }}</td>
                 <td>
                     @if (!empty($agent->image))
                     <img src="{{ asset($agent->image) }}" width="50" alt="Image" width="80" height="40">
